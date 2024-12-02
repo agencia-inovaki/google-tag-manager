@@ -1,6 +1,6 @@
 {
   "name": "google-tag-manager",
-  "vendor": "vtex",
+  "vendor": "inovakipartnerbr",
   "version": "3.5.4",
   "title": "Google Tag Manager",
   "description": "Google Tag Manager",
@@ -50,6 +50,11 @@
         "title": "Send Google Analytics 4 Events",
         "description": "When this setting is active, also send the GA4 version of the events",
         "type": "boolean"
+      },
+      "gtmHost": {
+        "title": "Google Tag Manager Host (Optional)",
+        "description": "Enter the host of your Google Tag Manager. Default: https://www.googletagmanager.com",
+        "type": "string"
       }
     }
   },

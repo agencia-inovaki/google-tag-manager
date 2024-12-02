@@ -3,11 +3,12 @@
     var gtmId = "{{settings.gtmId}}";
     var sendGA4EventsValue = "{{settings.sendGA4Events}}"
     var sendGA4Events = sendGA4EventsValue == 'true'
+    var host = hostFormatFix("{{settings.gtmHost}}" || "https://www.googletagmanager.com");
 
     window.__gtm__ = {
       sendGA4Events
     }
-    
+
     if (!gtmId) {
       console.error('Warning: No Google Tag Manager ID is defined. Please configure it in the apps admin.');
     } else {
@@ -17,8 +18,20 @@
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
       j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      `${host}/gtm.js?id=`+i+dl;f.parentNode.insertBefore(j,f);
       })(window,document,'script','dataLayer',gtmId)
     }
   })()
+
+  function hostFormatFix(domain) {
+    domain = decodeURIComponent(domain.trim());
+
+    if (domain.endsWith('/'))
+        domain = domain.slice(0, -1);
+
+    if (!/^https?:\/\//i.test(domain))
+        domain = 'https://' + domain;
+
+    return domain;
+}
 </script>
